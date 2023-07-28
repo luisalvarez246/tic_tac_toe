@@ -1,6 +1,6 @@
 const TicTac = require("./TicTacToe.js");
 
-describe("Basic verification", () =>
+describe("Basic logical verification", () =>
 {
 	const	tictac = new TicTac();
 
@@ -10,7 +10,8 @@ describe("Basic verification", () =>
 		let	play;
 		let	playerOne = 'O';
 		//act
-		play = tictac.selectPlayer();
+		tictac.selectPlayer();
+		play = tictac.play;
 		//assert
 		expect(play).toBe(playerOne);
 	}),
@@ -20,7 +21,8 @@ describe("Basic verification", () =>
 		let	play;
 		let	playerTwo = 'X';
 		//act
-		play = tictac.selectPlayer();
+		tictac.selectPlayer();
+		play = tictac.play;
 		//assert
 		expect(play).toBe(playerTwo);
 	}),
@@ -309,8 +311,8 @@ describe("Basic verification", () =>
 		let	gameboard;
 		//act
 		tictac.gameReset();
-		tictac.setPlay(0, 0);
-		tictac.setPlay(0, 1);
+		tictac.setPlay(0, 0, '');
+		tictac.setPlay(0, 1, '');
 		gameboard = tictac.gameboard;
 		//assert
 		expect(gameboard[0][0]).toBe('O');

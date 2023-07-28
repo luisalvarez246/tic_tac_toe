@@ -6,6 +6,7 @@ class TicTacToe
 		this.gameboard = [['', '', ''], ['', '', ''], ['', '', '']];
 		this.error = "";
 		this.message = "";
+		this.play = ""
 	}
 
 	selectPlayer()
@@ -14,12 +15,12 @@ class TicTacToe
 		if (this.counter === 0)
 		{
 			this.counter = 1;
-			return ('O');
+			this.play = 'O';
 		}
 		else
 		{
 			this.counter = 0;
-			return ('X');
+			this.play = 'X';
 		}
 	}
 
@@ -190,18 +191,23 @@ class TicTacToe
 		}
 	}
 
+	getPlay()
+	{
+		return (this.play);
+	}
+
 	setPlay(row, col)
 	{
-		let	play;
 		let	winner;
 
 		if (this.inputCheck(row, col) === 0)
 			return (this.error);
-		play = this.selectPlayer();
-		this.gameboard[row][col] = play;
+		this.selectPlayer();
+		this.gameboard[row][col] = this.play;
 		winner = this.checkWinner();
 		this.checkTie(winner);
 	}
 }
 
-module.exports = TicTacToe;
+export default TicTacToe;
+// module.exports = TicTacToe;
