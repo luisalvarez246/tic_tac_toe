@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="./js/index.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	<h1>Let's play Tic Tac Toe</h1>
+	<h2 id="winner"></h2>
+	<table id="gameboard">
+		<tr id="row0">
+			<td id="cell00"	></td>
+			<td id="cell01"	></td>
+			<td id="cell02"	></td>
+		</tr>
+		<tr id="row1">
+			<td id="cell10"></td>
+			<td id="cell11"></td>
+			<td id="cell12"></td>
+		</tr>
+		<tr id="row2">
+			<td id="cell20"></td>
+			<td id="cell21"></td>
+			<td id="cell22"></td>
+		</tr>
+	</table>
+	<button onclick="gameReset()">Restart</button>
+	<script>ftClickListener()</script>
+</body>
+</html>
