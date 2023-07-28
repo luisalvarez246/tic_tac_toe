@@ -1,4 +1,5 @@
-const TicTac = require("./TicTacToe.js");
+// const TicTac = require("./TicTacToe.js");
+import TicTac from "./TicTacToe.js";
 
 describe("Basic logical verification", () =>
 {
@@ -44,7 +45,7 @@ describe("Basic logical verification", () =>
 		//act
 		gameboard = tictac.gameboard;
 		//assert
-		for (i = 0; i < gameboard.length; i++)
+		for (let i = 0; i < gameboard.length; i++)
 			expect(gameboard[i].length).toBe(gameboardCols);
 	}),
 	it('row & col must be integers', () =>
@@ -153,7 +154,7 @@ describe("Basic logical verification", () =>
 		let	rowWinner;
 		//act
 		gameboard = tictac.gameboard;
-		for (i = 0; i < 3; i++)
+		for (let i = 0; i < 3; i++)
 			gameboard[0][i] = 'O';
 		rowWinner = tictac.checkRows();
 		//act2
@@ -171,7 +172,7 @@ describe("Basic logical verification", () =>
 		tictac.gameReset();
 		//act
 		gameboard = tictac.gameboard;
-		for (i = 0; i < 3; i++)
+		for (let i = 0; i < 3; i++)
 			gameboard[2][i] = 'X';
 		rowWinner = tictac.checkRows();
 		//act2
@@ -200,7 +201,7 @@ describe("Basic logical verification", () =>
 		let	colWinner;
 		//act
 		gameboard = tictac.gameboard;
-		for (j = 0; j < 3; j++)
+		for (let j = 0; j < 3; j++)
 			gameboard[j][0] = 'O';
 		colWinner = tictac.checkCols();
 		//assert
@@ -215,7 +216,7 @@ describe("Basic logical verification", () =>
 		//act
 		tictac.gameReset();
 		gameboard = tictac.gameboard;
-		for (j = 0; j < 3; j++)
+		for (let j = 0; j < 3; j++)
 			gameboard[j][2] = 'X';
 		colWinner = tictac.checkCols();
 		//assert
@@ -230,7 +231,7 @@ describe("Basic logical verification", () =>
 		//act
 		tictac.gameReset();
 		gameboard = tictac.gameboard;
-		for (i = 0; i < 3; i++)
+		for (let i = 0; i < 3; i++)
 			gameboard[i][i] = 'O';
 		diagonalWinner = tictac.checkDiagonal();
 		//assert

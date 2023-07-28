@@ -11,5 +11,10 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.6.1"
-  }
+  },
+	"jest": {
+	  "transform": {
+		"^.+\\.jsx?$": "babel-jest"
+	  }
+	}
 }
