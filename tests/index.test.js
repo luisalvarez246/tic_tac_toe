@@ -1,5 +1,4 @@
-// const TicTac = require("./TicTacToe.js");
-import TicTac from "../TicTacToe.js";
+import TicTac from "../js/TicTacToe.js";
 
 describe("Basic logical verification", () =>
 {
@@ -188,11 +187,21 @@ describe("Basic logical verification", () =>
 		let	message;
 		//act
 		message = tictac.message;
-		console.log(message);
 		tictac.gameReset();
 		message = tictac.message;
 		//assert
 		expect(message).toBe("");
+	}),
+	it('method gameReset sets counter to 0', () =>
+	{
+		//arrange
+		let	counter;
+		//act
+		tictac.counter = 1;
+		tictac.gameReset();
+		counter = tictac.counter;
+		//assert
+		expect(counter).toBe(0);
 	}),
 	it('if a col is filled with O player 1 wins', () =>
 	{
@@ -312,8 +321,8 @@ describe("Basic logical verification", () =>
 		let	gameboard;
 		//act
 		tictac.gameReset();
-		tictac.setPlay(0, 0, '');
-		tictac.setPlay(0, 1, '');
+		tictac.setPlay(0, 0);
+		tictac.setPlay(0, 1);
 		gameboard = tictac.gameboard;
 		//assert
 		expect(gameboard[0][0]).toBe('O');
