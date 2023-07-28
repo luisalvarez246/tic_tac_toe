@@ -1,5 +1,5 @@
 // const TicTac = require("./TicTacToe.js");
-import TicTac from "./TicTacToe.js";
+import TicTac from "../TicTacToe.js";
 
 describe("Basic logical verification", () =>
 {
