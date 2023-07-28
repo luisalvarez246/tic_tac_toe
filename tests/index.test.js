@@ -1,8 +1,10 @@
+import Scenarios from "../js/Scenarios.js";
 import TicTac from "../js/TicTacToe.js";
 
 describe("Basic logical verification", () =>
 {
 	const	tictac = new TicTac();
+	const	gameScenarios = new Scenarios();
 
 	it('first player should be O', () =>
 	{
@@ -149,44 +151,32 @@ describe("Basic logical verification", () =>
 	it('if a row is filled with O player 1 wins', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	rowWinner;
 		//act
-		gameboard = tictac.gameboard;
-		for (let i = 0; i < 3; i++)
-			gameboard[0][i] = 'O';
-		rowWinner = tictac.checkRows();
-		//act2
-		
-		//act3
+		gameScenarios.rowWin(0, 'O');
+		rowWinner = gameScenarios.checkRows();
 		//assert
 		expect(rowWinner).toBe(1);
-		expect(tictac.message).toBe("Player One Wins");
+		expect(gameScenarios.message).toBe("Player One Wins");
 	}),
 	it('if a row is filled with X player 2 wins', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	rowWinner;
-		tictac.gameReset();
 		//act
-		gameboard = tictac.gameboard;
-		for (let i = 0; i < 3; i++)
-			gameboard[2][i] = 'X';
-		rowWinner = tictac.checkRows();
-		//act2
-		
-		//act3
+		gameScenarios.gameReset();
+		gameScenarios.rowWin(2, 'X');
+		rowWinner = gameScenarios.checkRows();
 		//assert
 		expect(rowWinner).toBe(1);
-		expect(tictac.message).toBe("Player Two Wins");
+		expect(gameScenarios.message).toBe("Player Two Wins");
 	}),
 	it('method gameReset clears the message', () =>
 	{
 		//arrange
 		let	message;
 		//act
-		message = tictac.message;
+		tictac.message = "Hello";
 		tictac.gameReset();
 		message = tictac.message;
 		//assert
@@ -206,70 +196,61 @@ describe("Basic logical verification", () =>
 	it('if a col is filled with O player 1 wins', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	colWinner;
 		//act
-		gameboard = tictac.gameboard;
-		for (let j = 0; j < 3; j++)
-			gameboard[j][0] = 'O';
-		colWinner = tictac.checkCols();
+		gameScenarios.gameReset();
+		gameScenarios.colWin(0, 'O');
+		colWinner = gameScenarios.checkCols();
 		//assert
 		expect(colWinner).toBe(1);
-		expect(tictac.message).toBe("Player One Wins");
+		expect(gameScenarios.message).toBe("Player One Wins");
 	}),
 	it('if a col is filled with X player 2 wins', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	colWinner;
 		//act
-		tictac.gameReset();
-		gameboard = tictac.gameboard;
-		for (let j = 0; j < 3; j++)
-			gameboard[j][2] = 'X';
-		colWinner = tictac.checkCols();
+		gameScenarios.gameReset();
+		gameScenarios.colWin(1, 'X');
+		colWinner = gameScenarios.checkCols();
 		//assert
 		expect(colWinner).toBe(1);
-		expect(tictac.message).toBe("Player Two Wins");
+		expect(gameScenarios.message).toBe("Player Two Wins");
 	}),
-	it('if a diagonal line is filled with O player 1 wins', () =>
+	it('if a diagonal line is filled from left to right with O, player 1 wins', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	diagonalWinner;
 		//act
-		tictac.gameReset();
-		gameboard = tictac.gameboard;
-		for (let i = 0; i < 3; i++)
-			gameboard[i][i] = 'O';
-		diagonalWinner = tictac.checkDiagonal();
+		gameScenarios.gameReset();
+		gameScenarios.diagonalLeftWin('O');
+		diagonalWinner = gameScenarios.checkDiagonal();
 		//assert
 		expect(diagonalWinner).toBe(1);
-		expect(tictac.message).toBe("Player One Wins");
+		expect(gameScenarios.message).toBe("Player One Wins");
+	}),
+	it('if a diagonal line is filled from right to left with X, player 2 wins', () =>
+	{
+		//arrange
+		let	diagonalWinner;
+		//act
+		gameScenarios.gameReset();
+		gameScenarios.diagonalRightWin('X');
+		diagonalWinner = gameScenarios.checkDiagonal();
+		//assert
+		expect(diagonalWinner).toBe(1);
+		expect(gameScenarios.message).toBe("Player Two Wins");
 	}),
 	it('if gameboard is full and there are no winners it\'s a tie', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	tie;
 		let message;
 		//act
-		tictac.gameReset();
-		gameboard = tictac.gameboard;
-		for (let i = 0; i < 3; i++)
-		{
-			for (let j = 0; j < 3; j++)
-			{
-				if ((i === 0 && j === 2) || (i === 2 && j === 2))
-					gameboard[i][j] = 'X';
-				else if (i === 1 && (j === 0 || j === 1))
-					gameboard[i][j] = 'X';
-				else
-					gameboard[i][j] = 'O';
-			}
-		}
-		tie = tictac.checkTie(0);
-		message = tictac.message;
+		gameScenarios.gameReset();
+		gameScenarios.drawCondition();
+		tie = gameScenarios.checkTie(0);
+		message = gameScenarios.message;
 		//assert
 		expect(tie).toBe(1);
 		expect(message).toBe("It\'s a Tie");
@@ -277,26 +258,13 @@ describe("Basic logical verification", () =>
 	it('if gameboard is full and there are winners tie message is not assigned', () =>
 	{
 		//arrange
-		let	gameboard;
 		let	tie;
 		let message;
 		//act
-		tictac.gameReset();
-		gameboard = tictac.gameboard;
-		for (let i = 0; i < 3; i++)
-		{
-			for (let j = 0; j < 3; j++)
-			{
-				if ((i === 0 && j === 2) || (i === 2 && j === 2))
-					gameboard[i][j] = 'X';
-				else if (i === 1 && (j === 0 || j === 1))
-					gameboard[i][j] = 'X';
-				else
-					gameboard[i][j] = 'O';
-			}
-		}
-		tie = tictac.checkTie(1);
-		message = tictac.message;
+		gameScenarios.gameReset();
+		gameScenarios.drawCondition();
+		tie = gameScenarios.checkTie(1);
+		message = gameScenarios.message;
 		//assert
 		expect(tie).toBe(0);
 		expect(message).toBe("");
