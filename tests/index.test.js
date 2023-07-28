@@ -136,7 +136,6 @@ describe("Basic logical verification", () =>
 		tictac.gameReset();
 		gameboard = tictac.gameboard;
 		check = true;
-		console.table(gameboard);
 		for (let i = 0; i < 3; i++)
 		{
 			for (let j = 0; j < 3; j++)
@@ -192,6 +191,17 @@ describe("Basic logical verification", () =>
 		counter = tictac.counter;
 		//assert
 		expect(counter).toBe(0);
+	}),
+	it('method gameReset deletes error', () =>
+	{
+		//arrange
+		let	error;
+		//act
+		tictac.error = "Test";
+		tictac.gameReset();
+		error = tictac.error;
+		//assert
+		expect(error).toBe("");
 	}),
 	it('if a col is filled with O player 1 wins', () =>
 	{
