@@ -65,6 +65,11 @@ class TicTacToe
 			this.error = "Error: invalid move, position must be empty";
 			return (0);
 		}
+		else if (this.message)
+		{
+			this.error = "Game finished, push restart to start a new game";
+			return (0);
+		}
 		return (1);
 	}
 
@@ -187,14 +192,13 @@ class TicTacToe
 
 	setPlay(row, col)
 	{
-		// let error;
 		let	play;
 		let	winner;
 
 		if (this.inputCheck(row, col) === 0)
 			return (this.error);
 		play = this.selectPlayer();
-		this.gameboard[row][col];
+		this.gameboard[row][col] = play;
 		winner = this.checkWinner();
 		this.checkTie(winner);
 	}

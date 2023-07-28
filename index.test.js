@@ -288,5 +288,32 @@ describe("Basic verification", () =>
 		//assert
 		expect(tie).toBe(0);
 		expect(message).toBe("");
+	}),
+	it('no further input is allowed when a game is finished', () =>
+	{
+		//arrange
+		let	result;
+		let	error;
+		//act
+		tictac.gameReset();
+		tictac.message = "Test";
+		result = tictac.inputCheck(0, 0);
+		error = tictac.error;
+		//assert
+		expect(result).toBe(0);
+		expect(error).toBe("Game finished, push restart to start a new game");
+	}),
+	it('setPlay should place an O or X on the desired position', () =>
+	{
+		//arrange
+		let	gameboard;
+		//act
+		tictac.gameReset();
+		tictac.setPlay(0, 0);
+		tictac.setPlay(0, 1);
+		gameboard = tictac.gameboard;
+		//assert
+		expect(gameboard[0][0]).toBe('O');
+		expect(gameboard[0][1]).toBe('X');
 	})
 })
