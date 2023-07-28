@@ -11,7 +11,6 @@ class TicTacToe
 
 	selectPlayer()
 	{
-		console.log(this.counter);
 		if (this.counter === 0)
 		{
 			this.counter = 1;
@@ -61,14 +60,14 @@ class TicTacToe
 			this.error = "Error: row & col must be integers between 0 & 2";
 			return (0);
 		}
-		else if (!this.positionCheck(row, col))
-		{
-			this.error = "Error: invalid move, position must be empty";
-			return (0);
-		}
 		else if (this.message)
 		{
 			this.error = "Game finished, push restart to start a new game";
+			return (0);
+		}
+		else if (!this.positionCheck(row, col))
+		{
+			this.error = "Error: invalid move, position must be empty";
 			return (0);
 		}
 		return (1);
@@ -171,7 +170,7 @@ class TicTacToe
 					counter++;
 			}
 		}
-		if (counter === 9 && this.message === '')
+		if (counter === 9 && !this.message)
 		{
 			this.message = "It\'s a Tie";
 			return (1);
@@ -182,6 +181,7 @@ class TicTacToe
 	gameReset()
 	{
 		this.message = "";
+		this.error = "";
 		this.counter = 0;
 		for (let i = 0; i < 3; i++)
 		{
@@ -211,4 +211,3 @@ class TicTacToe
 }
 
 export default TicTacToe;
-// module.exports = TicTacToe;
